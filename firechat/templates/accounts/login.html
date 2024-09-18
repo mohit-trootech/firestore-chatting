@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/accounts.css' %}">
+<section class="background-radial-gradient overflow-hidden">
+    <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+    <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+    <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+        <div class="row gx-lg-5 align-items-center mb-5">
+            <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+                <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
+                    FireChat <br />
+                    <span style="color: hsl(218, 81%, 75%)">Connect Like Fire</span>
+                </h1>
+                <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
+                    Real-time synchronization
+                    Easy to set up and use
+                    Clean and modern UI
+                    Mirrors all the capabilities of the mobile app
+                </p>
+            </div>
+
+            <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+                <div class="card">
+                    <div class="card-body px-4 py-5 px-md-5">
+                        <form class="needs-validation" novalidate method="post">
+                            {% csrf_token %}
+                            {% for field in form %}
+                            <div class="form-floating mb-3">
+                                {{field}}
+                                <label for="{{field.id_for_label}}">{{field.label}}</label>
+                                {% if field.help_text %}
+                                <div class="invalid-feedback">
+                                    {{field.help_text}}
+                                </div>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                            <p class="mb-3">Don't have an account? <a href="{% url 'signup' %}"
+                                    class="text-decoration-none fw-bold">Sign
+                                    Up</a>
+                            </p>
+                            <!-- Submit button -->
+                            <button type="submit" class="btn btn-primary col-12 mb-4">
+                                Login
+                            </button>
+
+                            <!-- Register buttons -->
+                            <div class="text-center">
+                                <p>or login in with:</p>
+                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                    <i class="fab fa-facebook-f"></i>
+                                </button>
+
+                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                    <i class="fab fa-google"></i>
+                                </button>
+
+                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                    <i class="fab fa-twitter"></i>
+                                </button>
+
+                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                    <i class="fab fa-github"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Section: Design Block -->
+<!-- Login Form Validation -->
+<script src="{% static 'js/form-validation.js' %}"></script>
+{% endblock %}
