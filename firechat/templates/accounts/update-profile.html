@@ -1,0 +1,47 @@
+<dialog id="update_profile" class="modal">
+    <div class="modal-box" style="scrollbar-width:none">
+        <form method="dialog">
+            <button
+                class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 transition ease-in-out delay-50 hover:-rotate-90 hover:scale-110 duration-300">✕</button>
+        </form>
+        <h3 class="text-lg font-bold">Update Profile</h3>
+        <div class="py-4">
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for field in form %}
+                <label class="form-control w-full mb-4">
+                    <div class="label">
+                        <span class="label-text">{{field.label}}</span>
+                    </div>
+                    {{field}}
+                </label>
+                {% endfor %}
+                <div class="flex w-full flex-col my-5">
+                    <div class="divider">Update Links</div>
+                </div>
+                <label class="input input-bordered input-info flex items-center mb-4">
+                    <i class="fab fa-facebook me-3"></i>
+                    <input type="url" class="grow" placeholder="Facebook" name="facebook"
+                        value="{{user.social_links.facebook}}" />
+                </label>
+                <label class="input input-bordered input-secondary flex items-center mb-4">
+                    <i class="fab fa-instagram me-3"></i>
+                    <input type="url" class="grow" placeholder="Instagram" name="instagram"
+                        value="{{user.social_links.instagram}}" />
+                </label>
+                <label class="input input-bordered input-primary flex items-center mb-4">
+                    <i class="fab fa-github me-3"></i>
+                    <input type="url" class="grow" placeholder="Github" name="github"
+                        value="{{user.social_links.github}}" />
+                </label>
+                <label class="input input-bordered input-error flex items-center mb-4">
+                    <i class="fab fa-youtube me-3"></i>
+                    <input type="url" class="grow" placeholder="Youtube" name="youtube" value="
+                        {{user.social_links.youtube}}" />
+                </label>
+                <button class="btn btn-success btn-sm mb-5" type="button" id="locationBtn">Update Location</button>
+                <button class="btn w-full btn-secondary hover:text-white" type="submit">Update</button>
+            </form>
+        </div>
+    </div>
+</dialog>

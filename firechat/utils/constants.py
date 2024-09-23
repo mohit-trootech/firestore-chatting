@@ -1,5 +1,6 @@
 from django.utils.translation import gettext_noop as _
 from enum import Enum
+from dotenv import dotenv_values
 
 
 # Settings Constants
@@ -17,6 +18,8 @@ class Settings(Enum):
     DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
     DEBUG_TOOLBAR_IP = "127.0.0.1"
     CACHE_TABLE_NAME = "cache_table"
+    FIRESTORE_CERTIFICATE_PATH = ".json/certificate.json"
+    STORAGE_BUCKET = "STORAGE_BUCKET"
 
 
 # Status
@@ -26,6 +29,7 @@ class Status(Enum):
     STATUS_ACTIVE = True
     STATUS_200 = 200
     STATUS_202 = 202
+    STATUS_204 = 204
     STATUS_400 = 400
     STATUS_404 = 404
     STATUS_500 = 500
@@ -58,6 +62,9 @@ class Success(Enum):
     LOGGED_IN = _("Logged in Successfully")
     SIGNED_UP = _("User Registered Successfully")
     LOGGED_OUT = _("User Logged Out Successfully")
+    FORCE_LOGGED_OUT = _("User Logged Out Successfully from all Sessions")
+    PROFILE_UPDATED = _("Profile Updated Successfully")
+    NEWSLETTER_SUCCESS = _("Newsletter Subscribed Successfully")
 
 
 # Templates Name
@@ -65,9 +72,13 @@ class Success(Enum):
 class Templates(Enum):
     LOGIN = "accounts/login.html"
     SIGNUP = "accounts/signup.html"
-    PROFILE = "polls/profile.html"
+    PROFILE = "accounts/profile.html"
     HOME = "chat/index.html"
     ABOUT = "firechat/about.html"
+    ONLINE_USERS_LIST = "chat/online-users-list.html"
+    PARTICIPANTS = "chat/chat-participant.html"
+    CHAT_CONTENT = "chat/content.html"
+    NEWSLETTER = "email/newsletter.html"
 
 
 # Urls Path & Reverse
@@ -84,14 +95,22 @@ class Urls(Enum):
     LOGIN_REVERSE = "login"
     REGISTER_REVERSE = "signup"
     LOGOUT_REVERSE = "logout"
+    FORCE_LOGOUT_REVERSE = "force-logout"
     PROFILE_REVERSE = "profile"
+    USER_PROFILE_REVERSE = "user-profile"
     INDEX_REVERSE = "index"
-    PROFILE_UPDATE_SUCCESS_URL = "/profile/{pk}"
+    CHAT_DATA = "chat-data"
+    PROFILE_UPDATE_SUCCESS_URL = "/accounts/profile/{pk}"
+    NEWLETTER_REVERSE = "newsletter"
 
 
 # Forms Constants Dictionary
 # =====================================================
 FORM_LABELS = {
+    "profile": "Please Update Profile Picture",
+    "age": "Enter Age",
+    "phone": "Enter Phone Number",
+    "address": "Enter Address",
     "first_name": "Enter First Name",
     "last_name": "Enter Last Name",
     "username": "Enter Username",
@@ -99,19 +118,11 @@ FORM_LABELS = {
     "password": "Enter Password",
 }
 
-FORM_HELP_TEXTS = {
-    "first_name": "Please Enter First Name",
-    "last_name": "Please Enter Last Name",
-    "username": "Please Enter Username",
-    "email": "Please Enter Email",
-    "password": "Please Choose Password",
-}
-
 
 # Model Media Urls
 # =====================================================
 class ModelMediaUrl(Enum):
-    USER = "profile/{id}"
+    USER = "profile/{id}/{name}"
 
 
 # Email Configurations
@@ -121,3 +132,90 @@ class EmailConfig(Enum):
     EMAIL_HOST = "smtp.gmail.com"
     PORT_465 = 465
     PORT_587 = 587
+
+
+# Request KEY
+# =====================================================
+class RequestKey(Enum):
+    ONLINE_USERS = "onlineUsers"
+    REQUEST_TYPE = "requestType"
+    NEW_CHAT = "startNewChat"
+    USER_ID = "userId"
+    CHAT_MESSAGE = "newChatMessage"
+    USER_TEXT = "userText"
+    CHAT_ID = "chatId"
+    UPDATE_STATUS = "updateStatus"
+    UPDATE_FRIENDS_LIST = "updateFriendsList"
+    USER = "user"
+
+
+# Response KEY
+# =====================================================
+class ResponseKey(Enum):
+    PARTICIPANT_HTML = "participant_html"
+    CHAT_HTML = "chat_html"
+    FIRESTORE_CHAT_COLLECTION = """
+chatsCollectionUrl = `chats/{id}/messages;`
+"""
+
+
+# Email Secret
+# =====================================================
+class EmailConstants(Enum):
+    config = dotenv_values(".env")
+    NEWSLETTER = _("QuickReads Newsletter Subscribed")
+    HOST = config.get("EMAIL_HOST_USER")
+
+
+# Other Constants
+# =====================================================
+EMPTY_STR = ""
+UTF_8 = "utf-8"
+FORM_CLASS = "input input-bordered w-full"
+FORM_CLASS_FILE = "file-input file-input-bordered w-full"
+TEXT_AREA = "textarea textarea-bordered textarea-lg w-full"
+SELECT_CLASS = "select select-bordered w-full select-sm"
+THEME_CHOICES = (
+    ("light", "light"),
+    ("dark", "dark"),
+    ("cupcake", "cupcake"),
+    ("bumblebee", "bumblebee"),
+    ("emerald", "emerald"),
+    ("corporate", "corporate"),
+    ("synthwave", "synthwave"),
+    ("retro", "retro"),
+    ("cyberpunk", "cyberpunk"),
+    ("valentine", "valentine"),
+    ("halloween", "halloween"),
+    ("garden", "garden"),
+    ("forest", "forest"),
+    ("aqua", "aqua"),
+    ("lofi", "lofi"),
+    ("pastel", "pastel"),
+    ("fantasy", "fantasy"),
+    ("wireframe", "wireframe"),
+    ("black", "black"),
+    ("luxury", "luxury"),
+    ("dracula", "dracula"),
+    ("cmyk", "cmyk"),
+    ("autumn", "autumn"),
+    ("business", "business"),
+    ("acid", "acid"),
+    ("lemonade", "lemonade"),
+    ("night", "night"),
+    ("coffee", "coffee"),
+    ("winter", "winter"),
+    ("dim", "dim"),
+    ("nord", "nord"),
+    ("sunset", "sunset"),
+)
+
+TYPE_HTML = "text/html"
+SECONDS_IN_ONE_DAY = 86400
+INACTIVE_STATUS = 0
+ACTIVE_STATUS = 1
+
+STATUS_CHOICES = (
+    (INACTIVE_STATUS, _("Inactive")),
+    (ACTIVE_STATUS, _("Active")),
+)

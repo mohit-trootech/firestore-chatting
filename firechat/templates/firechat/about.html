@@ -1,2 +1,16 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}About{% endblock %}
+
+{% block content %}
+<div class="main-content">
+    <div class="grid grid-col-3 grid-flow-col gap-4">
+        <div class="col-span-1">
+            {% include 'firechat/sidebar.html' %}
+        </div>
+        <div class="col-span-2">
+            {% include 'firechat/chat-content.html' %}
+        </div>
+    </div>
+</div>
+{% endblock %}

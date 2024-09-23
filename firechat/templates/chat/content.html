@@ -1,0 +1,111 @@
+{% load static %}
+<div class="container py-5 mx-auto" id="main-chat-container" chat="{{chat.id}}">
+    <div class="flex flex-col border shadow-sm rounded-xl">
+        <div class="border-b rounded-t-xl py-3 px-4 md:py-4 md:px-5">
+            <div class="flex items-center justify-between ">
+                <div class="flex items-center">
+                    {% if request.user.profile %}
+                    <img class="rounded-full fit-cover me-3" src="{{request.user.profile.url}}" width="48" height="48"
+                        alt="Avatar">
+                    {% else %}
+                    <img class="rounded-full fit-cover me-3" src="{% static 'img/profile.jpg' %}" width="48" height="48"
+                        alt="Avatar">
+                    {% endif %}
+                    <h3 class="text-lg font-bold capitalize">
+                        {{request.user}}
+                    </h3>
+                </div>
+                <div class="flex items-center justify-center space-y-6">
+                    <div class="flex">
+                        {% if online %}
+                        {% if online.count == 1 %}
+                        {% if user.profile %} <img class="w-8 h-8 rounded-full border-2" src="{{user.profile.url}}"
+                            alt="">
+                        {% else %}
+                        <img class="w-8 h-8 rounded-full border-2" src="{% static 'img/profile.jpg' %}" alt="">
+                        {% endif %}
+                        {% else %}
+                        {% for user in online %}
+                        {% if forloop.counter < 4 %} {% if user.profile %} <img
+                            class="w-8 h-8 rounded-full border-2 -ml-3" src="{{user.profile.url}}" alt="">
+                            {% else %}
+                            <img class="w-8 h-8 rounded-full border-2 -ml-3" src="{% static 'img/profile.jpg' %}"
+                                alt="">
+                            {% endif %}
+                            {% endif %}
+                            {% endfor %}
+                            {% if online.count > 4 %}
+                            <span
+                                class="flex items-center justify-center font-semibold text-gray-600 text-xs w-8 h-8 rounded-full bg-gray-200 border-2 -ml-3">+{{online.count|add:"-3"}}</span>
+                            {% endif %}{% endif %}{% endif %}
+                    </div>
+                </div>
+                <div class="flex items-center cursor-pointer">
+                    <span class="label-text me-3">Status</span>
+                    <input type="checkbox" class="toggle toggle-secondary" {% if request.user.status %}checked="checked"
+                        {% endif %} id="updateStatus" />
+                </div>
+            </div>
+        </div>
+        <div class="p-4 md:p-5">
+            <div class="overflow-y-auto h-parent h-screen" style="scrollbar-width: none;">
+                <ul class="space-y-5" id="chatbox">
+                    {% for chat in chats %}
+                    {% if chat.sender == request.user %}
+                    <div class="chat chat-end userText">
+                        <div class="chat-image avatar">
+                            <div class="w-10 rounded-full">
+                                {% if chat.sender.profile %}
+                                <img alt="" src="{{chat.sender.profile.url}}" />
+                                {% else %}
+                                <img alt="" src="{% static 'img/profile.jpg' %}" />
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="chat-header">
+                            <a href="{% url 'user-profile' chat.sender %}">{{chat.sender}}</a>
+                            <time class="text-xs opacity-50">{{chat.created|date:"H:i"}}</time>
+                        </div>
+                        <div class="chat-bubble">{{chat}}</div>
+                        <div class="chat-footer opacity-50">Delivered</div>
+                    </div>
+                    {% else %}
+                    <div class="chat chat-start botText">
+                        <div class="chat-header capitalize">
+                            <a href="{% url 'user-profile' chat.sender %}">{{chat.sender}}</a>
+                            <time class="text-xs opacity-50">{{chat.created|date:"H:i"}}</time>
+                        </div>
+                        <div class="chat-bubble">{{chat}}</div>
+                        <div class="chat-footer opacity-50">
+                            {% if chat.sender.status %}
+                            Active
+                            {% else %}
+                            Unactive
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+                <div id="chat-bar-bottom">
+                    <p></p>
+                </div>
+            </div>
+        </div>
+        <div class="border-t rounded-b-xl py-3 px-4 md:py-4 md:px-5 flex w-full items-center">
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp" alt="avatar 3"
+                class="me-2" style="width: 40px; height: 100%;">
+            <input type="text" class="input input-bordered input-secondary w-full me-2" id="textInput"
+                placeholder="Enter a Message" onkeypress="chatSend(event)">
+            <a role="button" class="ms-3 btn btn-secondary" href="javascript:void(0))" onclick="heartButton()">
+                <i class="fas text-lg fa-heart"></i>
+            </a>
+            <a role="button" class="ms-3 btn-primary btn" href="javascript:void(0))" onclick="sendButton()">
+                <i class="fas text-lg fa-paper-plane"></i>
+            </a>
+            <div id="chat-bar-bottom">
+                <p></p>
+            </div>
+        </div>
+    </div>
+</div>

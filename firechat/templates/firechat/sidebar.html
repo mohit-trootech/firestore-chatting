@@ -1,0 +1,41 @@
+{% load static %}
+<div class="drawer-lg md:drawer-open p-5">
+    <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
+    <div class="drawer-side h-100 rounded-lg lg:border" style="scrollbar-width: none;">
+        <div class="border-b rounded-t-xl py-3 px-4 md:py-4 md:px-5">
+            <h3 class="text-lg font-bold">
+                Chats
+            </h3>
+        </div>
+        <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
+        <aside id="default-sidebar" class="transition-transform -translate-x-full" aria-label="Sidebar">
+            <div class="px-3 py-4 overflow-y-auto h-screen">
+                <ul class="space-y-2 font-medium">
+                    <li>
+                        <div
+                            class="flex justify-between border items-center mb-3 px-2 py-3 dark:hover:bg-gray-700 rounded-md">
+                            <div class="flex items-center">
+                                <a class="inline-flex items-start mr-3" href="javscript:void(0)">
+                                    <img class="rounded-full"
+                                        src="https://res.cloudinary.com/dc6deairt/image/upload/v1638102932/user-48-01_nugblk.jpg"
+                                        width="48" height="48" alt="">
+                                </a>
+                                <div class="pr-1">
+                                    <h2 class="text-xl leading-snug font-bold">Lauren Marsano</h2>
+                                    <p class="text-mutedsd">This is Text</p>
+                                </div>
+                            </div>
+                            <div class="is-active">
+                                <span class="relative flex h-3 w-3">
+                                    <span
+                                        class="animate-ping absolute top-0 inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+</div>

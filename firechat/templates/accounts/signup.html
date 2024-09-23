@@ -3,92 +3,52 @@
 {% block title %}Signup{% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/accounts.css' %}">
-<section class="background-radial-gradient overflow-hidden">
-    <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
-    <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
-    <div class="container px-4 py-5 px-md-5 text-center text-lg-start mt-5">
-        <div class="row gx-lg-5 align-items-center mb-5">
-            <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
-                <div class="card">
-                    <div class="card-body px-4 py-5 px-md-5">
-                        <form class="needs-validation" novalidate method="post">
-                            {% csrf_token %}
-                            {% for field in form %}
-                            <div class="form-floating mb-3">
-                                {{field}}
-                                <label for="{{field.id_for_label}}">{{field.label}}</label>
-                                {% if field.help_text %}
-                                <div class="invalid-feedback">
-                                    {{field.help_text}}
-                                </div>
-                                {% endif %}
-                            </div>
-                            {% endfor %}
-                            <div class="form-floating mb-3">
-                                <input type="password" name="password1" id="password1" class="form-control"
-                                    placeholder="Enter Password">
-                                <label for="password1">Enter Password</label>
-                                <div class=" invalid-feedback">
-                                    Please enter a Password
-                                </div>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type=" password" name="password2" id="password2" class="form-control"
-                                    placeholder="Enter Password">
-                                <label for="password2">Confirm Password</label>
-                                <small>Password must contain at least 8 characters, with a combination of
-                                    <code>uppercase</code>, <code>lowercase</code>, <code>special</code>
-                                    characters.</small>
-                            </div>
-                            <p class="mb-3">Already have an account? <a href="{% url 'login' %}"
-                                    class="text-decoration-none fw-bold">
-                                    Login here</a>
-                            </p>
-                            <!-- Submit button -->
-                            <button type="submit" class="btn btn-primary col-12 mb-4">
-                                Login
-                            </button>
+<div class="my-7 border rounded-xl shadow-lg mx-14">
+    <div class="p-4 sm:p-7">
+        <div class="text-center">
+            <h1 class="block text-2xl font-bold">Sign up</h1>
+            <p class="mt-2 text-sm">
+                Already have an account?
+                <a class="text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium"
+                    href="{% url 'login' %}">
+                    Login here
+                </a>
+            </p>
+        </div>
 
-                            <!-- Register buttons -->
-                            <div class="text-center">
-                                <p>or signup with:</p>
-                                <button type="button" class="btn btn-link btn-floating mx-1">
-                                    <i class="fab fa-facebook-f"></i>
-                                </button>
-
-                                <button type="button" class="btn btn-link btn-floating mx-1">
-                                    <i class="fab fa-google"></i>
-                                </button>
-
-                                <button type="button" class="btn btn-link btn-floating mx-1">
-                                    <i class="fab fa-twitter"></i>
-                                </button>
-
-                                <button type="button" class="btn btn-link btn-floating mx-1">
-                                    <i class="fab fa-github"></i>
-                                </button>
-                            </div>
-                        </form>
+        <div class="mt-5">
+            <button type="button"
+                class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border shadow-lg hover:bg-gray-50 hover:text-black focus:outline-none focus:text-black focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none mb-5">
+                <i class="fab fa-google"></i>
+                Sign in with Google
+            </button>
+            <form action="" method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                <label class="form-control w-full mb-4">
+                    <div class="label">
+                        <span class="label-text">{{field.label}}</span>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
-                <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
-                    New to Firechat? <br />
-                    <span style="color: hsl(218, 81%, 75%)">Join Now!</span>
-                </h1>
-                <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
-                    Real-time synchronization
-                    Easy to set up and use
-                    Clean and modern UI
-                    Mirrors all the capabilities of the mobile app
-                </p>
-            </div>
+                    {{field}}
+                </label>
+                {% endfor %}
+                <label class="form-control w-full mb-4">
+                    <div class="label">
+                        <span class="label-text">Choose Password</span>
+                    </div>
+                    <input type="password" class="input input-bordered w-full" name="password1"
+                        placeholder="Choose Password">
+                </label>
+                <label class="form-control w-full mb-4">
+                    <div class="label">
+                        <span class="label-text">Confirm Password</span>
+                    </div>
+                    <input type="password" class="input input-bordered w-full" name="password2"
+                        placeholder="Confirm Password">
+                </label>
+                <button class="btn w-full btn-secondary hover:text-white" type="submit">Register</button>
+            </form>
         </div>
     </div>
-</section>
-<!-- Section: Design Block -->
-<!-- Login Form Validation -->
-<script src="{% static 'js/form-validation.js' %}"></script>
+</div>
 {% endblock %}

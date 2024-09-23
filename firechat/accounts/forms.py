@@ -10,32 +10,25 @@ from django.forms import (
     ClearableFileInput,
 )
 from firechat.accounts.models import User
-from firechat.utils.constants import FORM_LABELS, FORM_HELP_TEXTS
+from firechat.utils.constants import (
+    FORM_LABELS,
+    FORM_CLASS,
+    FORM_CLASS_FILE,
+)
 
 
 class UserCreationForm(ModelForm):
     class Meta:
         model = User
-        fields = ["first_name", "last_name", "username", "email"]
-        widgets = {}
-        labels = {}
-        help_texts = {}
-        for field in fields:
-            if field == "email":
-                input_option = EmailInput
-            elif field == "password":
-                input_option = PasswordInput
-            else:
-                input_option = TextInput
-            widgets[field] = input_option(
-                attrs={
-                    "class": "form-control",
-                    "required": False if field != "username" else True,
-                    "placeholder": field,
-                }
+        fields = ["username"]
+        widgets = {
+            "username": TextInput(
+                attrs={"class": FORM_CLASS, "placeholder": "Enter Username"}
             )
-            labels[field] = FORM_LABELS[field]
-            help_texts[field] = FORM_HELP_TEXTS[field]
+        }
+        labels = {
+            "username": FORM_LABELS.get("username"),
+        }
 
 
 class UserLoginForm(Form):
@@ -44,25 +37,23 @@ class UserLoginForm(Form):
         max_length=30,
         widget=TextInput(
             attrs={
-                "class": "form-control",
+                "class": FORM_CLASS,
                 "placeholder": "Enter Login Username",
                 "required": True,
             }
         ),
         label=FORM_LABELS.get("username"),
-        help_text=FORM_HELP_TEXTS.get("username"),
     )
     password = CharField(
         required=True,
         widget=PasswordInput(
             attrs={
-                "class": "form-control",
+                "class": FORM_CLASS,
                 "placeholder": "Enter Login Password",
                 "required": True,
             }
         ),
         label=FORM_LABELS.get("password"),
-        help_text=FORM_HELP_TEXTS.get("password"),
     )
 
 
@@ -79,6 +70,7 @@ class UserUpdateForm(ModelForm):
             "address",
         ]
         widgets = {}
+        labels = {}
         for field in fields:
             if field == "profile":
                 input_option = ClearableFileInput
@@ -88,4 +80,9 @@ class UserUpdateForm(ModelForm):
                 input_option = EmailInput
             else:
                 input_option = TextInput
-            widgets[field] = input_option(attrs={"class": "form-control"})
+            widgets[field] = (
+                input_option(attrs={"class": FORM_CLASS})
+                if field != "profile"
+                else input_option(attrs={"class": FORM_CLASS_FILE})
+            )
+            labels[field] = FORM_LABELS.get(field)

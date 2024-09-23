@@ -1,0 +1,18 @@
+{% load static %}
+<script>
+    /*CSRF Token */
+    const csrfToken = document.querySelector(
+        'input[name="csrfmiddlewaretoken"]'
+    ).value;
+    /*API Constans */
+    const WEATHERAPI = "e6ed093031474d538f6101732240905";
+</script>
+<!-- Custom Scripts -->
+<script src="{% static 'js/constants.js' %}"></script>
+<script src="{% static 'js/index.js' %}"></script>
+<script src="{% static 'js/ajaxRequests.js' %}"></script>
+<script src="{% static 'js/chat.js' %}"></script>
+<script src="{% static 'js/theme.js' %}"></script>
+<script src="{% static 'js/utils.js' %}"></script>
+<script src="{% static 'js/toast.js' %}"></script>
+<script src="{% static 'js/newletter.js' %}"></script>
