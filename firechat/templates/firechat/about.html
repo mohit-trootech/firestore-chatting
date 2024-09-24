@@ -3,13 +3,356 @@
 {% block title %}About{% endblock %}
 
 {% block content %}
-<div class="main-content">
-    <div class="grid grid-col-3 grid-flow-col gap-4">
-        <div class="col-span-1">
-            {% include 'firechat/sidebar.html' %}
-        </div>
-        <div class="col-span-2">
-            {% include 'firechat/chat-content.html' %}
+<div class="hero w-full">
+    <div class="hero-content text-center">
+        <div class="">
+            <p class="my-4">Firechat is a real-time group chat application built with Django and Firestore. It features
+                a responsive UI using
+                Tailwind CSS & Daisy UI, allowing users to communicate seamlessly while providing a smooth user
+                experience.
+            </p>
+            <p class="py-6">
+            <div class="stats shadow">
+                <div class="stat">
+                    <div class="stat-figure text-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            class="inline-block h-8 w-8 stroke-current">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="stat-title">Total Likes</div>
+                    <div class="stat-value text-primary">25.6K</div>
+                    <div class="stat-desc">21% more than last month</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-figure text-secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            class="inline-block h-8 w-8 stroke-current">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="stat-title">Page Views</div>
+                    <div class="stat-value text-secondary">2.6M</div>
+                    <div class="stat-desc">21% more than last month</div>
+                </div>
+
+                <div class="stat">
+                    <div class="stat-figure text-secondary">
+                        <div class="avatar online">
+                            <div class="w-16 rounded-full">
+                                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-value">86%</div>
+                    <div class="stat-title">Tasks done</div>
+                    <div class="stat-desc text-secondary">31 tasks remaining</div>
+                </div>
+            </div>
+            </p>
+            <div class="flex w-full flex-col">
+                <div class="divider text-lg">Features</div>
+            </div>
+            <ul class="timeline timeline-vertical">
+                <li>
+                    <div class="timeline-start">Realtime Chatting</div>
+                    <div class="timeline-middle">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="timeline-end timeline-box">Instant messaging with friends and groups.</div>
+                    <hr />
+                </li>
+                <li>
+                    <hr />
+                    <div class="timeline-start">User Authentication</div>
+                    <div class="timeline-middle">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="timeline-end timeline-box">Secure login and registration for users.</div>
+                    <hr />
+                </li>
+                <li>
+                    <hr />
+                    <div class="timeline-start">Profile Mangement</div>
+                    <div class="timeline-middle">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="timeline-end timeline-box">Update your profile information easily.</div>
+                    <hr />
+                </li>
+                <li>
+                    <hr />
+                    <div class="timeline-start">User Profile View</div>
+                    <div class="timeline-middle">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="timeline-end timeline-box">View the profiles of available users.</div>
+                    <hr />
+                </li>
+                <li>
+                    <hr />
+                    <div class="timeline-start">Online Status</div>
+                    <div class="timeline-middle">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="timeline-end timeline-box">Show your online status to other users.</div>
+                </li>
+                <li>
+                    <hr />
+                    <div class="timeline-start">Login Stream</div>
+                    <div class="timeline-middle">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="timeline-end timeline-box">Track your login streak to encourage daily usage.</div>
+                </li>
+            </ul>
+            <div class="flex w-full flex-col">
+                <div class="divider text-lg">Technologies Stack</div>
+            </div>
+            <div class="carousel carousel-vertical rounded-box h-32 w-72">
+                <div class="carousel-item h-full">
+                    <img
+                        src="https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&amp;logo=python&amp;logoColor=blue" />
+                </div>
+                <div class="carousel-item h-full">
+                    <img
+                        src="https://img.shields.io/badge/Django-092E20?style=for-the-badge&amp;logo=django&amp;logoColor=green" />
+                </div>
+                <div class="carousel-item h-full">
+                    <img
+                        src="https://img.shields.io/badge/firebase-ffca28?style=for-the-badge&logo=firebase&logoColor=black" />
+                </div>
+                <div class="carousel-item h-full">
+                    <img
+                        src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&amp;logo=tailwind-css&amp;logoColor=white" />
+                </div>
+                <div class="carousel-item h-full">
+                    <img
+                        src="https://img.shields.io/badge/daisyUI-1ad1a5?style=for-the-badge&amp;logo=daisyui&amp;logoColor=white" />
+                </div>
+                <div class="carousel-item h-full">
+                    <img
+                        src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&amp;logo=html5&amp;logoColor=white" />
+                </div>
+                <div class="carousel-item h-full">
+                    <img
+                        src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&amp;logo=javascript&amp;logoColor=F7DF1E" />
+                </div>
+                <div class="carousel-item h-full">
+                    <img
+                        src="https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&amp;logo=jquery&amp;logoColor=white" />
+                </div>
+                <div class="carousel-item h-full">
+                    <img
+                        src="https://img.shields.io/badge/Font_Awesome-339AF0?style=for-the-badge&amp;logo=fontawesome&amp;logoColor=white" />
+                </div>
+            </div>
+            <div class="flex w-full flex-col">
+                <div class="divider text-lg">Installation</div>
+            </div>
+            <div role="tablist" class="tabs tabs-boxed tabs-md">
+                <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="Prerequisites" checked="true" />
+                <div role="tabpanel" class="tab-content p-10">
+                    <div class="mockup-code text-left">
+                        <pre data-prefix="$"><code>Python 3.x</code></pre>
+                        <pre data-prefix="$"><code>Django</code></pre>
+                        <pre data-prefix="$"><code>Firebase Account</code></pre>
+                        <pre data-prefix="$"><code>Firestore Database</code></pre>
+                    </div>
+                </div>
+                <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="Setup Instructions" />
+                <div role="tabpanel" class="tab-content p-10">
+                    <div class="mockup-code text-left">
+                        <pre data-prefix="#"><code>Clone the repository</code></pre>
+                        <pre
+                            data-prefix="$"><code>git clone <a href="https://github.com/mohit-trootech/firestore-chatting.git">https://github.com/mohit-trootech/firestore-chatting.git</a></code></pre>
+                        <pre data-prefix="$"><code>cd firestore-chatting</code></pre>
+                        <pre data-prefix="$"><code>Firestore Database</code></pre>
+                    </div>
+                </div>
+                <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="Requirements" />
+                <div role="tabpanel" class="tab-content p-10">
+                    <div class="mockup-code text-left">
+                        <pre data-prefix="#"><code>Create Virtual Environment</code></pre>
+                        <pre data-prefix="$"><code>python -m venv venv</code></pre>
+                        <pre data-prefix="$"><code>source venv/bin/activate</code></pre>
+                        <pre data-prefix="#"><code>On Windows use `venv\Scripts\activate`</code></pre>
+                        <pre data-prefix="#"><code>Install Required Packages</code></pre>
+                        <pre data-prefix="$"><code>pip install -r requirements.txt</code></pre>
+                    </div>
+                </div>
+                <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="Setup & Runserver" />
+                <div role="tabpanel" class="tab-content p-10">
+                    <div class="mockup-code text-left">
+                        <pre data-prefix="#"><code>Create & Configure Firebase Account</code></pre>
+                        <pre data-prefix="#"><code>Update Django Create Django Environment Files & Settings</code></pre>
+                        <pre data-prefix="#"><code>Configure Database and Migrate Migrations</code></pre>
+                        <pre data-prefix="$"><code>python manage.py makemigrations</code></pre>
+                        <pre data-prefix="$"><code>python manage.py migrate</code></pre>
+                        <pre data-prefix="#"><code>Start Development Server</code></pre>
+                        <pre data-prefix="$"><code>python manage.py runserver</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="flex w-full flex-col">
+                <div class="divider text-lg">Contributing</div>
+            </div>
+            <div class="diff h-24">
+                <div class="diff-item-1">
+                    <div class="bg-primary text-primary-content grid place-content-center text-sm font-black">
+                        Contributions are welcome! If you have suggestions or improvements, please fork the repository
+                        and submit a pull
+                        request.
+                    </div>
+                </div>
+                <div class="diff-item-2">
+                    <div class="bg-base-200 grid place-content-center text-sm font-black">
+                        Contributions are welcome! If you have suggestions or improvements, please fork the repository
+                        and submit a pull
+                        request.
+                    </div>
+                </div>
+                <div class="diff-resizer"></div>
+            </div>
+            <div class="flex w-full flex-col">
+                <div class="divider text-lg">Acknowledgments</div>
+            </div>
+            <ul class="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical">
+                <li>
+                    <div class="timeline-middle">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="timeline-start mb-10 md:text-end">
+                        <div class="text-lg font-black">LICENSE</div>
+                        This project is licensed under the MIT License. See the LICENSE file for details.
+                    </div>
+                    <hr />
+                </li>
+                <li>
+                    <hr />
+                    <div class="timeline-middle">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="timeline-end mb-10">
+                        <div class="text-lg font-black">Django</div>
+                        Django team for creating an amazing framework.
+                    </div>
+                    <hr />
+                </li>
+                <li>
+                    <hr />
+                    <div class="timeline-middle">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="timeline-start mb-10 md:text-end">
+                        <div class="text-lg font-black">Firestore</div>
+                        Firebase for providing real-time database solutions.
+                    </div>
+                    <hr />
+                </li>
+                <li>
+                    <hr />
+                    <div class="timeline-middle">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="timeline-end mb-10">
+                        <div class="text-lg font-black">Tailwind CSS</div>
+                        Tailwind CSS for the beautiful and responsive UI.
+                    </div>
+                    <hr />
+                </li>
+                <li>
+                    <hr />
+                    <div class="timeline-middle">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="timeline-start mb-10 md:text-end">
+                        <div class="text-lg font-black">Daisy UI</div>
+                        Daisy UI Components
+                    </div>
+                </li>
+                <li>
+                    <hr />
+                    <div class="timeline-middle">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="timeline-end mb-10">
+                        <div class="text-lg font-black">CORE</div>
+                        Core HTML CSS JS & JQuery Foundation to Provide Such Documentation for Development Ease.
+                    </div>
+                    <hr />
+                </li>
+                <li>
+                    <hr />
+                    <div class="timeline-middle">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="timeline-start mb-10 md:text-end">
+                        <div class="text-lg font-black">Contact</div>
+                        For any questions or issues, please contact: <a href="https://github.com/mohit-trootech"
+                            target="_blank">
+                            <img src="https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&amp;logo=git&amp;logoColor=white"
+                                alt="Git">
+                        </a>
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
