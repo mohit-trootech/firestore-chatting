@@ -54,4 +54,25 @@ $(document).ready(() => {
   if (elems.length > 1) {
     elems[elems.length - 1].scrollIntoView(true);
   }
+
+  /*Load More Chats */
+  $(".has-visited").click((elem) => {
+    elem.preventDefault();
+    const pageNumber = elem.target.id;
+    elem.target.innerHTML = loadingDotsElems;
+    getRequest(
+      "/chat/",
+      {
+        page: pageNumber,
+        requestType: "loadChats",
+      },
+      loadChatContent
+    );
+    elem.classList.remove("has-visited");
+  });
 });
+
+function loadChatContent(content) {
+  console.log(content);
+  loadChatsContent.innerHTML += content;
+}

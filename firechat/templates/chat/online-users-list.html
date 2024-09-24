@@ -6,12 +6,14 @@
     <li>
         <div class="flex justify-between border items-center mb-3 px-2 py-3 dark:hover:bg-gray-700 rounded-md">
             <div class="flex items-center">
-                <a href="{% url 'user-profile' user %}" class="inline-flex items-start">
-                    <div class=" flex items-start mr-3">
+                <a href="{% url 'user-profile' user %}" class="inline-flex items-center">
+                    <div class=" flex items-center mr-3">
                         {% if user.profile %}
-                        <img class="rounded-full" src="{{user.profile.url}}" width="48" height="48" alt="">
+                        <img class="rounded-full w-8 h-8 object-cover" src="{{user.profile.url}}" width="48" height="48"
+                            alt="">
                         {% else %}
-                        <img class="rounded-full" src="{% static 'img/profile.jpg' %}" width="48" height="48" alt="">
+                        <img class="rounded-full w-8 h-8 object-cover" src="{% static 'img/profile.jpg' %}" width="48"
+                            height="48" alt="">
                         {% endif %}
                     </div>
                     <div class="pr-1 capitalize">

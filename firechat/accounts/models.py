@@ -6,8 +6,6 @@ from phonenumber_field.modelfields import PhoneNumberField
 from firechat.utils.constants import (
     ModelMediaUrl,
     EMPTY_STR,
-    INACTIVE_STATUS,
-    STATUS_CHOICES,
     THUMBNAIL_PREVIEW_HTML,
     THUMBNAIL_PREVIEW_TAG,
 )
@@ -17,7 +15,7 @@ from django_extensions.db.fields import CreationDateTimeField
 
 
 def _upload_to(self, file):
-    return ModelMediaUrl.USER.value.format(id=self.id, name=file)
+    return ModelMediaUrl.USER.value.format(id=self.id, file=file)
 
 
 class CustomUserManager(UserManager):

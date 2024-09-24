@@ -1,4 +1,3 @@
-from turtle import update
 from firechat.chat.models import Message
 from firechat.accounts.models import User
 from firechat.utils.firestore_config import db, firestore
@@ -7,6 +6,7 @@ from django.template.loader import render_to_string
 from firechat.utils.constants import Templates, TYPE_HTML, SECONDS_IN_ONE_DAY
 from django.utils.timezone import now
 from django.contrib.sessions.models import Session
+from django.shortcuts import get_list_or_404
 
 
 def get_online_users():
@@ -101,8 +101,7 @@ def get_all_messages():
     """
     get Complete Messages List
     """
-    messages = Message.objects.select_related("sender").all()
-    return messages
+    return get_list_or_404(Message)
 
 
 def create_new_message(sender, content):

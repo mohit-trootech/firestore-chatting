@@ -1,4 +1,3 @@
-import re
 from typing import Any
 from django.http.request import HttpRequest as HttpRequest
 from django.http.response import HttpResponse as HttpResponse
@@ -10,6 +9,7 @@ from firechat.utils.constants import (
     UTF_8,
     EmailConstants,
     Success,
+    ContextNames,
 )
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -22,16 +22,33 @@ from firechat.utils.utils import (
     update_friends_list,
     get_online_users,
 )
-from django.contrib.sessions.models import Session
+from django.core.paginator import Paginator
 
 
 class HomeView(TemplateView):
     template_name = Templates.HOME.value
 
-    def get_context_data(self, **kwargs) -> dict[str, Any]:
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context["chats"] = get_all_messages()
+        paginator = Paginator(get_all_messages(), 10)
+        page_number = self.request.GET.get("page")
+        page_obj = paginator.get_page(page_number)
+        page_obj.object_list.reverse()
+        context[ContextNames.MESSAGES.value] = page_obj
         return context
+
+    def get_template_names(self):
+        """
+        get template update using htmx
+
+        :return:
+        """
+        if (
+            self.request.GET.get(RequestKey.REQUEST_TYPE.value)
+            == RequestKey.LOAD_CHATS.value
+        ):
+            return Templates.CHAT_LIST.value
+        return self.template_name
 
 
 home_view = HomeView.as_view()

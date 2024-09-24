@@ -80,6 +80,7 @@ class Templates(Enum):
     PARTICIPANTS = "chat/chat-participant.html"
     CHAT_CONTENT = "chat/content.html"
     NEWSLETTER = "email/newsletter.html"
+    CHAT_LIST = "chat/chat-list.html"
 
 
 # Urls Path & Reverse
@@ -103,6 +104,12 @@ class Urls(Enum):
     CHAT_DATA = "chat-data"
     PROFILE_UPDATE_SUCCESS_URL = "/accounts/profile/{pk}"
     NEWLETTER_REVERSE = "newsletter"
+
+
+# Context Variable Names
+# =====================================================
+class ContextNames(Enum):
+    MESSAGES = "chats"
 
 
 # Forms Constants Dictionary
@@ -148,6 +155,7 @@ class RequestKey(Enum):
     UPDATE_STATUS = "updateStatus"
     UPDATE_FRIENDS_LIST = "updateFriendsList"
     USER = "user"
+    LOAD_CHATS = "loadChats"
 
 
 # Response KEY
