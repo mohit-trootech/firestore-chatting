@@ -8,7 +8,12 @@ from firechat.utils.constants import (
     EMPTY_STR,
     INACTIVE_STATUS,
     STATUS_CHOICES,
+    THUMBNAIL_PREVIEW_HTML,
+    THUMBNAIL_PREVIEW_TAG,
 )
+from django.utils.html import format_html
+from django_extensions.db.models import ActivatorModel
+from django_extensions.db.fields import CreationDateTimeField
 
 
 def _upload_to(self, file):
@@ -20,14 +25,13 @@ class CustomUserManager(UserManager):
         return super().prefetch_related("following", "followers").get(*args, **kwargs)
 
 
-class User(AbstractUser):
+class User(AbstractUser, ActivatorModel):
     profile = models.ImageField(upload_to=_upload_to, null=True, blank=True)
     age = models.IntegerField(null=True, blank=True)
     address = models.CharField(max_length=128, null=True, blank=True)
     phone = PhoneNumberField(region="IN", blank=True, null=True)
     streak = models.IntegerField(default=0)
-    status = models.IntegerField(choices=STATUS_CHOICES, default=INACTIVE_STATUS)
-    last_streak_update = models.DateTimeField(blank=True, null=True, auto_now_add=True)
+    last_streak_update = CreationDateTimeField()
     following = models.ManyToManyField(
         "self", blank=True, related_name="followers", symmetrical=False
     )
@@ -45,14 +49,11 @@ class User(AbstractUser):
             return "following"
         return "follow"
 
-    # @property
-    # def thumbnail_preview(self):
-    #     if self.profile:
-    #         return format_html(THUMBNAIL_PREVIEW_TAG.format(img=self.profile.url))
-    #     return format_html(THUMBNAIL_PREVIEW_HTML)
-
-    def __str__(self):
-        return self.username
+    @property
+    def thumbnail_preview(self):
+        if self.profile:
+            return format_html(THUMBNAIL_PREVIEW_TAG.format(img=self.profile.url))
+        return format_html(THUMBNAIL_PREVIEW_HTML)
 
     def __str__(self):
         return self.username

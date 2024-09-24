@@ -1,7 +1,7 @@
 {% load static %}
 <div class="container py-5 mx-auto" id="main-chat-container" chat="{{chat.id}}">
-    <div class="flex flex-col border shadow-sm rounded-xl">
-        <div class="border-b rounded-t-xl py-3 px-4 md:py-4 md:px-5">
+    <div class="flex flex-col border shadow-sm rounded-xl mx-5 justify-center">
+        <div class="border-b rounded-t-xl py-3 px-4 md:py-4">
             <div class="flex items-center justify-between ">
                 <div class="flex items-center">
                     {% if request.user.profile %}
@@ -16,7 +16,7 @@
                     </h3>
                 </div>
                 <div class="flex items-center justify-center space-y-6">
-                    <div class="flex">
+                    <div class="flex cursor-pointer" onclick="online_users_modal.showModal()">
                         {% if online %}
                         {% if online.count == 1 %}
                         {% if user.profile %} <img class="w-8 h-8 rounded-full border-2" src="{{user.profile.url}}"
@@ -97,10 +97,10 @@
                 class="me-2" style="width: 40px; height: 100%;">
             <input type="text" class="input input-bordered input-secondary w-full me-2" id="textInput"
                 placeholder="Enter a Message" onkeypress="chatSend(event)">
-            <a role="button" class="ms-3 btn btn-secondary" href="javascript:void(0))" onclick="heartButton()">
+            <a role="button" class="ms-3 btn btn-secondary" href="javascript:void(0)" onclick="heartButton()">
                 <i class="fas text-lg fa-heart"></i>
             </a>
-            <a role="button" class="ms-3 btn-primary btn" href="javascript:void(0))" onclick="sendButton()">
+            <a role="button" class="ms-3 btn-primary btn" href="javascript:void(0)" onclick="sendButton()">
                 <i class="fas text-lg fa-paper-plane"></i>
             </a>
             <div id="chat-bar-bottom">

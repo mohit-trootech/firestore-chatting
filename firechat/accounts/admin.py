@@ -14,7 +14,11 @@ class SocialMediaInline(admin.StackedInline):
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     list_display = ["id", "username", "is_active"]
-    readonly_fields = ["id", "last_streak_update"]
+    readonly_fields = [
+        "id",
+        "last_streak_update",
+        "thumbnail_preview",
+    ]
     fieldsets = [
         (
             "Customer Details",
@@ -22,6 +26,7 @@ class UserAdmin(admin.ModelAdmin):
                 "fields": [
                     "id",
                     "profile",
+                    "thumbnail_preview",
                     "first_name",
                     "last_name",
                     "username",

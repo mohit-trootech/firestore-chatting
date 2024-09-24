@@ -132,6 +132,9 @@ class RegistrationView(FormView):
         registration form handle, user signed up if form_valid else if password not match user already exist or password valiadtion return form_invalid
         """
         try:
+            if self.request.POST.get("terms") is None:
+                form.add_error(None, Errors.TERMS_NOT_ACCEPTED.value)
+                return super().form_invalid(form)
             password1 = self.request.POST.get("password1")
             password2 = self.request.POST.get("password2")
             validate_password(password1)
