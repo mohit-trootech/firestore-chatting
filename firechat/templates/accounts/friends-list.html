@@ -1,5 +1,3 @@
-{% load custom_tags %}
-{% load static %}
 <dialog id="friends_list" class="modal">
     <div class="modal-box" style="scrollbar-width:none">
         <form method="dialog">
@@ -14,40 +12,7 @@
                     <ul>
                         {% if request.user.following.all %}
                         {% for user in request.user.following.all %}
-                        <li>
-                            <div
-                                class="flex justify-between border items-center mb-3 px-2 py-3 dark:hover:bg-gray-700 rounded-md">
-                                <div class="flex items-center">
-                                    <a href="{% url 'user-profile' user %}" class="inline-flex items-start">
-                                        <div class=" flex items-start mr-3">
-                                            {% if user.profile %}
-                                            <img class="rounded-full" src="{{user.profile.url}}" width="48" height="48"
-                                                alt="">
-                                            {% else %}
-                                            <img class="rounded-full" src="{% static 'img/profile.jpg' %}" width="48"
-                                                height="48" alt="">
-                                            {% endif %}
-                                        </div>
-                                        <div class="pr-1 capitalize">
-                                            {% if user.first_name %}
-                                            <h2 class="text-xl leading-snug font-bold">{{user.get_full_name}}</h2>
-                                            {% else%}
-                                            <h2 class="text-xl leading-snug font-bold">{{user.username}}</h2>
-                                            {% endif %}
-                                            {% if user.get_mutual_friends %}
-                                            <p class="">{{user.get_mutual_friends}}</p>
-                                            {% else %}
-                                            <p class="">No Mutual Friends</p>
-                                            {% endif %}
-                                        </div>
-                                    </a>
-                                </div>
-                                <button class="btn btn-secondary capitalize" onclick="toggleFollowingFollower(event)"
-                                    id="user-{{user}}">
-                                    {% call_method request.user "is_following" user %}
-                                </button>
-                            </div>
-                        </li>
+                        {% include 'accounts/friends-list-item.html' %}
                         {% endfor %}
                         {% else %}
                         <div class="alert alert-primary d-flex align-items-center" role="alert">
@@ -65,36 +30,7 @@
                     <ul>
                         {% if request.user.followers.all %}
                         {% for user in request.user.followers.all %}
-                        <li>
-                            <div
-                                class="flex justify-between border items-center mb-3 px-2 py-3 shadow-sm dark:hover:bg-gray-700 rounded-md">
-                                <div class="flex items-center">
-                                    <a href="{% url 'user-profile' user %}" class="inline-flex items-start">
-                                        <div class=" flex items-start mr-3">
-                                            {% if user.profile %}
-                                            <img class="rounded-full" src="{{user.profile.url}}" width="48" height="48"
-                                                alt="">
-                                            {% else %}
-                                            <img class="rounded-full" src="{% static 'img/profile.jpg' %}" width="48"
-                                                height="48" alt="">
-                                            {% endif %}
-                                        </div>
-                                        <div class="pr-1 capitalize">
-                                            {% if user.first_name %}
-                                            <h2 class="text-xl leading-snug font-bold">{{user.get_full_name}}</h2>
-                                            {% else%}
-                                            <h2 class="text-xl leading-snug font-bold">{{user.username}}</h2>
-                                            {% endif %}
-                                            {% if user.get_mutual_friends %}
-                                            <p class="">{{user.get_mutual_friends}}</p>
-                                            {% else %}
-                                            <p class="">No Mutual Friends</p>
-                                            {% endif %}
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
+                        {% include 'accounts/friends-list-item.html' %}
                         {% endfor %}
                         {% else %}
                         <div class="alert alert-primary d-flex align-items-center" role="alert">

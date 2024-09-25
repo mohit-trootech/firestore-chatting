@@ -54,7 +54,8 @@
                     <div id="loadChatsContent">
                         <div class="flex justify-center">
                             {% if chats.has_next %}
-                            <div class="has-visited btn btn-primary" id="{{chats.next_page_number}}">Button Load Chats
+                            <div class="btn btn-primary" onclick="loadMoreChats(this)" id="{{chats.next_page_number}}">
+                                Button Load Chats
                             </div>
                             {% endif %}
                         </div>
