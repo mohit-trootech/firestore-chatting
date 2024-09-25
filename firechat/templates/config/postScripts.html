@@ -7,6 +7,28 @@
     /*API Constans */
     const WEATHERAPI = "e6ed093031474d538f6101732240905";
 </script>
+<!-- Animate on Scroll Scripts -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({
+        disable: false,
+        startEvent: 'DOMContentLoaded',
+        initClassName: 'aos-init',
+        animatedClassName: 'aos-animate',
+        useClassNames: false,
+        disableMutationObserver: false,
+        debounceDelay: 50,
+        throttleDelay: 99,
+        offset: 120,
+        delay: 0,
+        duration: 400,
+        easing: 'ease',
+        once: false,
+        mirror: false,
+        anchorPlacement: 'top-bottom',
+
+    });
+</script>
 <!-- Custom Scripts -->
 <script src="{% static 'js/constants.js' %}"></script>
 <script src="{% static 'js/index.js' %}"></script>
