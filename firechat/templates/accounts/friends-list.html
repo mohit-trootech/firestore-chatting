@@ -1,0 +1,48 @@
+<dialog id="friends_list" class="modal">
+    <div class="modal-box" style="scrollbar-width:none">
+        <form method="dialog">
+            <button
+                class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2  transition ease-in-out delay-50 hover:-rotate-90 hover:scale-110 duration-300">✕</button>
+        </form>
+        <h3 class="text-lg font-bold">Friends List</h3>
+        <div class="py-4 w-full">
+            <div role="tablist" class="tabs tabs-bordered w-full overflow-auto" style="scrollbar-width:none">
+                <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="Following" checked="checked" />
+                <div role="tabpanel" class="tab-content p-3">
+                    <ul>
+                        {% if request.user.following.all %}
+                        {% for user in request.user.following.all %}
+                        {% include 'accounts/friends-list-item.html' %}
+                        {% endfor %}
+                        {% else %}
+                        <div class="alert alert-primary d-flex align-items-center" role="alert">
+                            <i class="fa fa-info-circle me-2"></i>
+                            <div>
+                                No Users Available
+                            </div>
+                        </div>
+                        {% endif %}
+                    </ul>
+                </div>
+
+                <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="Followers" />
+                <div role="tabpanel" class="tab-content p-3">
+                    <ul>
+                        {% if request.user.followers.all %}
+                        {% for user in request.user.followers.all %}
+                        {% include 'accounts/friends-list-item.html' %}
+                        {% endfor %}
+                        {% else %}
+                        <div class="alert alert-primary d-flex align-items-center" role="alert">
+                            <i class="fa fa-info-circle me-2"></i>
+                            <div>
+                                No Users Available
+                            </div>
+                        </div>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</dialog>

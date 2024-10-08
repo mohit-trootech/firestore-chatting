@@ -1,0 +1,19 @@
+{% load static %}
+<!-- Required HTML Constants -->
+<script>
+    const currentUser = "{{user}}"
+    {% if user.profile %}
+    const currentUserProfilePicture = '{{user.profile.url}}'
+    {% else %}
+    const currentUserProfilePicture = "{% static 'img/profile.jpg' %}"
+    {% endif %}
+</script>
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Jquery CDN -->
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+<!-- Add Firebase products that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+<script src="{% static 'js/firebase_config.js' %}"></script>

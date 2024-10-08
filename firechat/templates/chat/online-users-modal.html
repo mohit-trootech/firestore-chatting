@@ -1,0 +1,19 @@
+{% load static %}
+{% load custom_tags %}
+<dialog id="online_users_modal" class="modal">
+    <div class="modal-box" style="scrollbar-width: none;">
+        <form method="dialog">
+            <button
+                class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2  transition ease-in-out delay-50 hover:-rotate-90 hover:scale-110 duration-300">✕</button>
+        </form>
+        <h3 class="text-lg font-bold mb-3 text-center">Online Users</h3>
+        <div class="my-5">
+            <div id="onlineUsers">
+                {% include 'chat/online-users-list.html' %}
+            </div>
+        </div>
+    </div>
+    <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+    </form>
+</dialog>

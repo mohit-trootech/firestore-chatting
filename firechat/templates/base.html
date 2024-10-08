@@ -9,16 +9,25 @@
     <link rel="shortcut icon" href="{% static 'img/logo.png' %}" type="image/x-icon">
     {% include "config/css.html" %}
 </head>
+{% include 'config/preScripts.html' %}
 
-
-<body data-bs-theme="dark">
-
-    {% block content%}
-    {% endblock %}
-
+<body data-theme="dark">
+    {% csrf_token %}
+    <div class="main-content">
+        {% include 'firechat/navbar.html' %}
+        {% block content %}
+        {% endblock %}
+        {% include 'firechat/footer.html' %}
+    </div>
     {% include 'config/message.html' %}
+    <!-- firestore_config -->
+    <div id="firestore_config"></div>
+    {% if request.user.is_authenticated %}
+    {% include 'chat/online-users-modal.html' %}
+    {% endif %}
 </body>
-{% include 'config/js.html' %}
-
+{% include 'config/postScripts.html' %}
+{% block js %}
+{% endblock %}
 
 </html>

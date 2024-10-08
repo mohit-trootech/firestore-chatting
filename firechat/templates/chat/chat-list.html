@@ -1,0 +1,32 @@
+{% load static %}
+{% if chats.has_previous %}
+<div class="flex justify-center">
+    {% if chats.has_next %}
+    <div class="btn btn-primary" id="{{chats.next_page_number}}" onclick="loadMoreChats(this)">Button Load Chats</div>
+    {% endif %}
+</div>
+{% endif %}
+{% for chat in chats %}
+{% if chat.sender == request.user %}
+<div class="chat chat-end userText">
+    {% else %}
+    <div class="chat chat-start botText">
+        {% endif %}
+        <div class="chat-image avatar">
+            <div class="w-10 rounded-full">
+                {% if chat.sender.profile %}
+                <img alt="" src="{{chat.sender.profile.url}}" />
+                {% else %}
+                <img alt="" src="{% static 'img/profile.jpg' %}" />
+                {% endif %}
+            </div>
+        </div>
+        <div class="chat-header">
+            <a href="{% url 'user-profile' chat.sender %}">{{chat.sender}}</a>
+            <time class="text-xs opacity-50">{{chat.created|date:"H:i"}}</time>
+        </div>
+        <div class="chat-bubble">{{chat}}</div>
+        <div class="chat-footer opacity-50">Delivered</div>
+
+    </div>
+    {% endfor %}

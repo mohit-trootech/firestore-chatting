@@ -1,4 +1,3 @@
-const WEATHERAPI = "e6ed093031474d538f6101732240905";
 
 location_input = document.getElementById("id_address");
 document.getElementById("locationBtn").addEventListener("click", (event) => {

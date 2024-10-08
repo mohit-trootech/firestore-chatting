@@ -25,6 +25,8 @@ INSTALLED_APPS = [
     "phonenumber_field",
     "dj_database_url",
     "login_required",
+    "debug_toolbar",
+    "schema_graph",
 ]
 
 
@@ -39,6 +41,8 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "login_required.middleware.LoginRequiredMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "firechat.utils.update_streak_middleware.UpdateStreakMiddleware",
 ]
 
 # Middlewares
@@ -54,6 +58,10 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "firechat.utils.context_processors.theme_form",
+                "firechat.utils.context_processors.newsletter_form",
+                "firechat.utils.context_processors.get_all_online_users",
+                "firechat.utils.context_processors.get_firestore_configuration",
             ],
         },
     },
@@ -79,8 +87,8 @@ WSGI_APPLICATION = "firechat.wsgi.application"
 # =====================================================
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 DATABASES = {}
-DATABASES["default"] = dj_database_url.config(
-    default=config.get("DJANGO_DATABASE_URL"),
+DATABASES["default"] = dj_database_url.parse(
+    config.get("DJANGO_DATABASE_URL"),
 )
 
 # Password validation
@@ -139,3 +147,32 @@ EMAIL_USE_TLS = False  # use port 587
 EMAIL_PORT = EmailConfig.PORT_465.value if EMAIL_USE_SSL else EmailConfig.PORT_587.value
 EMAIL_HOST_USER = config.get("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = config.get("EMAIL_HOST_PASSWORD")
+
+
+# FireStore Configuration
+# =====================================================
+FIREBASE_ORM_CERTIFICATE = path.join(
+    BASE_DIR, Settings.FIRESTORE_CERTIFICATE_PATH.value
+)
+FIREBASE_ORM_BUCKET_NAME = config.get(Settings.STORAGE_BUCKET.value)
+
+
+# Django Debug Toolbar Configuration
+# =====================================================
+INTERNAL_IPS = [Settings.DEBUG_TOOLBAR_IP.value]
+DEBUG_TOOLBAR_PANELS = [
+    "debug_toolbar.panels.history.HistoryPanel",
+    "debug_toolbar.panels.versions.VersionsPanel",
+    "debug_toolbar.panels.timer.TimerPanel",
+    "debug_toolbar.panels.settings.SettingsPanel",
+    "debug_toolbar.panels.headers.HeadersPanel",
+    "debug_toolbar.panels.request.RequestPanel",
+    "debug_toolbar.panels.sql.SQLPanel",
+    "debug_toolbar.panels.staticfiles.StaticFilesPanel",
+    "debug_toolbar.panels.templates.TemplatesPanel",
+    "debug_toolbar.panels.alerts.AlertsPanel",
+    "debug_toolbar.panels.cache.CachePanel",
+    "debug_toolbar.panels.signals.SignalsPanel",
+    "debug_toolbar.panels.redirects.RedirectsPanel",
+    "debug_toolbar.panels.profiling.ProfilingPanel",
+]

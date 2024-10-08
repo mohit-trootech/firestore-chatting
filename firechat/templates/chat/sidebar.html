@@ -1,0 +1,21 @@
+{% load static %}
+<div class="drawer-lg md:drawer-open p-5">
+    <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
+    <div class="drawer-side h-100 rounded-lg lg:border" style="scrollbar-width: none;">
+        <div class="border-b rounded-t-xl py-3 px-4 md:py-4 md:px-5">
+            <h3 class="text-lg font-bold">
+                Chats
+            </h3>
+        </div>
+        <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
+        <aside id="default-sidebar" class="transition-transform -translate-x-full" aria-label="Sidebar">
+            <div class="px-3 py-4 overflow-y-auto h-screen">
+                <ul class="space-y-2 font-medium">
+                    <div id="chatListItem"></div>
+                    {% include 'chat/chat-list-item.html' %}
+                </ul>
+            </div>
+        </aside>
+    </div>
+</div>
+{% include 'chat/search-user-modal.html' %}
